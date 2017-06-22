@@ -1,8 +1,13 @@
+import './styles.scss';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Test } from './bundles/TestBundles/components/Test';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Application } from './components';
 
 ReactDOM.render(
-  <Test/>,
+  <Router>
+    <Application/>
+  </Router>,
   document.getElementById('root')
 );

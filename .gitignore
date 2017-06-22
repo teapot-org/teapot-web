@@ -1,5 +1,7 @@
 .idea/
 node_modules/
-public/bundle.js
+dist/
 yarn.lock
 npm-debug.log
+*.css
+*.css.map
