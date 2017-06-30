@@ -7,7 +7,7 @@
   "license": "GPL-3.0",
   "scripts": {
     "clean": "rimraf ./dist/*",
-    "prod": "npm run clean && webpack -p",
+    "prod": "npm run clean && webpack -p --env.prod=true",
     "dev": "webpack-dev-server"
   },
   "dependencies": {
