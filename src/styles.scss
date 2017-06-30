@@ -3,3 +3,15 @@
   padding: 0;
   border: 0;
 }
+
+html {
+  height: 100%;
+
+  body {
+    height: inherit;
+
+    div#root {
+      height: inherit;
+    }
+  }
+}

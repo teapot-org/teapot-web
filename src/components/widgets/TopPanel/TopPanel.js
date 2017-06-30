@@ -4,12 +4,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const TopPanel = () => (
-  <ul className="TopPanel">
-    <li><Link to={{ pathname: '/' }}>Home</Link></li>
-    <li><Link to={{ pathname: '/login' }}>Login</Link></li>
-    <li><Link to={{ pathname: '/signup' }}>Signup</Link></li>
-    <li><Link to={{ pathname: '/profile' }}>Profile</Link></li>
-  </ul>
+  <div className="TopPanel">
+    <ul>
+      <li><Link to="/">Home</Link></li>
+      <li><Link to="/signin">Sign in</Link></li>
+      <li><Link to="/signup">Sign up</Link></li>
+      <li><Link to="/profile">Profile</Link></li>
+    </ul>
+  </div>
 );
 
 export default TopPanel;
