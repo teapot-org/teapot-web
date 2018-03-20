@@ -1,0 +1,22 @@
+{
+  "name": "teapot-web",
+  "version": "0.1.0",
+  "repository": "https://github.com/teapot-org/teapot-web.git",
+  "author": [
+    "Nikolay Toporkov <toporkov.kolya96@gmail.com>",
+    "Arthur Salimyanov <sar243102@gmail.com>"
+  ],
+  "license": "GPL-3.0",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-scripts": "1.1.1"
+  }
+}
