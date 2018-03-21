@@ -1,8 +1,8 @@
 import React from 'react'
 import {Route, Switch} from "react-router-dom";
 
-import HomePage from "../pages/HomePage";
-import Error404Page from "../pages/Error404Page";
+import HomePage from "../../pages/HomePage";
+import Error404Page from "../../pages/Error404Page";
 
 class Router extends React.Component {
   render() {

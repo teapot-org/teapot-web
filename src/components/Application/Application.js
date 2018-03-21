@@ -1,7 +1,7 @@
 import React from 'react'
 
-import TopPanel from './TopPanel'
-import Router from './Router'
+import TopPanel from '../widgets/TopPanel'
+import Router from '../widgets/Router'
 
 class Application extends React.Component {
   render() {
