@@ -1,13 +1,17 @@
-import {createStore} from 'redux'
+import {applyMiddleware, createStore} from 'redux'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
+import {routerMiddleware} from 'react-router-redux'
 
-import rootReducer from '../reducers/index'
+import rootReducer from '../reducers'
+import history from '../history'
 
 const store = createStore(
   rootReducer,
-  undefined,
-  composeWithDevTools(thunk)
+  composeWithDevTools(applyMiddleware(
+    thunk,
+    routerMiddleware(history)
+  ))
 );
 
 export default store;
