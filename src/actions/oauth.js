@@ -1,8 +1,8 @@
 import axios from 'axios'
-import {replace} from 'react-router-redux'
+import {push, replace} from 'react-router-redux'
 
 import {CLIENT_ID, CLIENT_SECRET, HOST} from '../constants/app'
-import {signInFailure, signInRequest, signInSuccess} from '../constants/actionTypes'
+import {signInFailure, signInRequest, signInSuccess, signOut as logout} from '../constants/actionTypes'
 
 export const signIn = (email, password) => async (dispatch) => {
   try {
@@ -36,5 +36,6 @@ export const signIn = (email, password) => async (dispatch) => {
 };
 
 export const signOut = () => (dispatch) => {
-
+  dispatch(logout());
+  dispatch(push('/sign-in'))
 };
