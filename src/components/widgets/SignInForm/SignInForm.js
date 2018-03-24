@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {Redirect} from 'react-router-dom'
 
 import {signIn} from '../../../actions/oauth'
 
@@ -7,11 +8,7 @@ class SignInForm extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = this.getInitialState();
-  }
-
-  getInitialState() {
-    return {
+    this.state = {
       email: '',
       password: ''
     };
@@ -33,6 +30,15 @@ class SignInForm extends React.Component {
   render() {
     const {oauth} = this.props;
     const {email, password} = this.state;
+
+    if (oauth.isAuthenticated) {
+      return (
+        <Redirect to={{
+          pathname: '/',
+          state: {from: this.props.location}
+        }}/>
+      );
+    }
 
     return (
       <div>
