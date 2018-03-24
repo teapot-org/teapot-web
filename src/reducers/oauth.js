@@ -2,6 +2,7 @@ import {SIGN_IN_FAILURE, SIGN_IN_REQUEST, SIGN_IN_SUCCESS} from '../constants/ac
 
 const initialState = {
   authenticating: false,
+  isAuthenticated: false,
   user: {
     token: null,
     profile: null
@@ -19,6 +20,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         authenticating: false,
+        isAuthenticated: true,
         user: action.payload
       };
     case SIGN_IN_FAILURE:

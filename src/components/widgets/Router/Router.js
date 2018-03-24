@@ -1,5 +1,6 @@
 import React from 'react'
-import {Switch, Route} from "react-router";
+import {Route, Switch} from "react-router";
+import AuthorizedRoute from "../../widgets/AuthorizedRoute";
 import HomePage from "../../pages/HomePage";
 import SignInPage from "../../pages/SignInPage";
 import Error404Page from "../../pages/Error404Page";
@@ -9,7 +10,7 @@ class Router extends React.Component {
     return (
       <main>
         <Switch>
-          <Route path="/" exact component={HomePage}/>
+          <AuthorizedRoute path="/" exact component={HomePage}/>
           <Route path="/sign-in" exact component={SignInPage}/>
           <Route component={Error404Page}/>
         </Switch>

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {push} from 'react-router-redux'
+import {replace} from 'react-router-redux'
 
 import {CLIENT_ID, CLIENT_SECRET, HOST} from '../constants/app'
 import {signInFailure, signInRequest, signInSuccess} from '../constants/actionTypes'
@@ -29,7 +29,7 @@ export const signIn = (email, password) => async (dispatch) => {
       profile: profileResponse.data
     };
     dispatch(signInSuccess(user));
-    dispatch(push('/'));
+    dispatch(replace('/'));
   } catch (e) {
     dispatch(signInFailure());
   }
