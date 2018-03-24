@@ -1,4 +1,4 @@
-import {SIGN_IN_FAILURE, SIGN_IN_REQUEST, SIGN_IN_SUCCESS} from '../constants/actionTypes'
+import {SIGN_IN_FAILURE, SIGN_IN_REQUEST, SIGN_IN_SUCCESS, SIGN_OUT} from '../constants/actionTypes'
 
 const initialState = {
   authenticating: false,
@@ -24,6 +24,7 @@ export default function (state = initialState, action) {
         user: action.payload
       };
     case SIGN_IN_FAILURE:
+    case SIGN_OUT:
       return initialState;
     default:
       return state;
