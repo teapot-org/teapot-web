@@ -1,17 +1,18 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {push} from 'react-router-redux'
-import {signOut} from '../../../actions/oauth'
+
+import {signOut} from '../../../constants/actionTypes'
 
 class TopPanel extends React.Component {
   render() {
-    const {isAuthenticated, user} = this.props.oauth;
+    const {isAuthenticated, profile} = this.props.oauth;
     const {signIn, signOut} = this.props;
 
     if (isAuthenticated) {
       return (
         <div>
-          <b>{user.profile.name}</b>
+          <b>{profile.name}</b>
           <button onClick={signOut}>Log out</button>
         </div>
       );
@@ -35,6 +36,7 @@ export default connect(
     },
     signOut: () => {
       dispatch(signOut());
+      dispatch(push('/sign-in'))
     }
   })
 )(TopPanel);

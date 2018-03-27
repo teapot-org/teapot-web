@@ -12,12 +12,13 @@ class SignInForm extends React.Component {
       email: '',
       password: ''
     };
+
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   onChange(event) {
-    const target = event.target;
-    const value = (target.type === 'checkbox') ? target.checked : target.value;
-    const name = target.name;
+    const {name, value} = event.target;
     this.setState({[name]: value});
   }
 
@@ -28,13 +29,13 @@ class SignInForm extends React.Component {
   }
 
   render() {
-    const {oauth} = this.props;
+    const {isAuthenticated, isLoading, profile} = this.props.oauth;
     const {email, password} = this.state;
 
-    if (oauth.isAuthenticated) {
+    if (isAuthenticated) {
       return (
         <Redirect to={{
-          pathname: '/',
+          pathname: `/profile/${profile.name}`,
           state: {from: this.props.location}
         }}/>
       );
@@ -43,14 +44,14 @@ class SignInForm extends React.Component {
     return (
       <div>
         <form
-          onSubmit={this.onSubmit.bind(this)}
+          onSubmit={this.onSubmit}
         >
           <label>Email:
             <input
               name='email'
               type='email'
               value={email}
-              onChange={this.onChange.bind(this)}
+              onChange={this.onChange}
             />
           </label>
           <label>Password:
@@ -58,10 +59,10 @@ class SignInForm extends React.Component {
               name='password'
               type='password'
               value={password}
-              onChange={this.onChange.bind(this)}
+              onChange={this.onChange}
             />
           </label>
-          <button type='submit' disabled={oauth.authenticating}>Sign in</button>
+          <button type='submit' disabled={isLoading}>Sign in</button>
         </form>
       </div>
     );
