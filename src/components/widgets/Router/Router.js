@@ -4,6 +4,7 @@ import AuthorizedRoute from "../../widgets/AuthorizedRoute";
 import HomePage from "../../pages/HomePage";
 import SignInPage from "../../pages/SignInPage";
 import ProfilePage from "../../pages/ProfilePage";
+import SignUpPage from "../../pages/SignUpPage";
 import Error404Page from "../../pages/Error404Page";
 
 class Router extends React.Component {
@@ -15,6 +16,7 @@ class Router extends React.Component {
           <Route path="/sign-in" exact component={SignInPage}/>
           <Route path="/profile" exact component={ProfilePage}/>
           <Route path="/profile/:username" exact component={ProfilePage}/>
+          <Route path="/sign-up" exact component={SignUpPage}/>
           <Route component={Error404Page}/>
         </Switch>
       </main>
