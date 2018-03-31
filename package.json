@@ -1,11 +1,11 @@
 {
-  "name": "teapot-web",
+  "name": "react",
   "version": "0.1.0",
-  "repository": "https://github.com/teapot-org/teapot-web.git",
-  "author": [
-    "Nikolay Toporkov <toporkov.kolya96@gmail.com>",
-    "Arthur Salimyanov <sar243102@gmail.com>"
-  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teapot-org/teapot-web.git"
+  },
+  "author": "",
   "license": "GPL-3.0",
   "scripts": {
     "start": "react-scripts start",
@@ -29,5 +29,11 @@
   },
   "devDependencies": {
     "redux-devtools-extension": "^2.13.2"
-  }
+  },
+  "description": "",
+  "bugs": {
+    "url": "https://github.com/teapot-org/teapot-web/issues"
+  },
+  "homepage": "https://github.com/teapot-org/teapot-web#readme",
+  "main": "index.js"
 }
