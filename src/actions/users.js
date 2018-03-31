@@ -1,6 +1,7 @@
-import axios from '../http-common';
+import {replace} from 'react-router-redux'
 
 import {getUserFailure, getUserRequest, getUserSuccess} from "../constants/actionTypes";
+import axios from '../http-common';
 
 export const getUserByUsername = (username) => (dispatch) => {
   dispatch(getUserRequest());
@@ -15,4 +16,25 @@ export const getUserByUsername = (username) => (dispatch) => {
   }).catch(e => {
     dispatch(getUserFailure());
   });
+};
+
+export const signUp = (email, name, password, firstName, lastName, description) => async (dispatch) => {
+  try {
+    await axios({
+      method: 'POST',
+      url: '/users',
+      data: {
+        email: email,
+        name: name,
+        password: password,
+        firstName: firstName,
+        lastName: lastName,
+        description: description
+      }
+    });
+
+    dispatch(replace('/sign-in'));
+  } catch (e) {
+    console.log("SignUp failed");
+  }
 };
