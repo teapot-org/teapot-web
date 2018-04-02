@@ -1,28 +1,44 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {push} from 'react-router-redux'
+import {Link} from 'react-router-dom'
 
 import {signOut} from '../../../constants/actionTypes'
+import {Dropdown, Icon, Menu} from "semantic-ui-react";
 
 class TopPanel extends React.Component {
   render() {
     const {isAuthenticated, profile} = this.props.oauth;
-    const {signIn, signOut} = this.props;
-
-    if (isAuthenticated) {
-      return (
-        <div>
-          <b>{profile.name}</b>
-          <button onClick={signOut}>Log out</button>
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <button onClick={signIn}>Sign in</button>
-        </div>
-      );
-    }
+    return (
+      <Menu attached='top' borderless>
+        {isAuthenticated ? (
+          <Menu.Menu position='right'>
+            <Dropdown item simple text={profile.name}>
+              <Dropdown.Menu>
+                <Dropdown.Item
+                  as={Link}
+                  to='/'
+                  onClick={this.props.signOut}
+                >
+                  <Icon name='sign out'/>
+                  Sign out
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </Menu.Menu>
+        ) : (
+          <Menu.Menu position='right'>
+            <Menu.Item as={Link} to='/sign-in'>
+              <Icon name='sign in'/>
+              Sign in
+            </Menu.Item>
+            <Menu.Item as={Link} to='/sign-up'>
+              <Icon name='add user'/>
+              Sign up
+            </Menu.Item>
+          </Menu.Menu>
+        )}
+      </Menu>
+    );
   }
 }
 
@@ -31,12 +47,8 @@ export default connect(
     oauth: state.oauth
   }),
   dispatch => ({
-    signIn: () => {
-      dispatch(push('/sign-in'));
-    },
     signOut: () => {
       dispatch(signOut());
-      dispatch(push('/sign-in'))
     }
   })
 )(TopPanel);
