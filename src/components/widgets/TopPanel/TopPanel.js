@@ -9,7 +9,7 @@ class TopPanel extends React.Component {
   render() {
     const {isAuthenticated, profile} = this.props.oauth;
     return (
-      <Menu attached='top' borderless>
+      <Menu borderless>
         {isAuthenticated ? (
           <Menu.Menu position='right'>
             <Dropdown item simple text={profile.name}>
