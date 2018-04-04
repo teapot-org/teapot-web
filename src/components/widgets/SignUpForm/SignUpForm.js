@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Form, Button} from 'semantic-ui-react'
+import {Button, Form} from 'semantic-ui-react'
 
 import {signUp} from '../../../actions/users'
 
@@ -85,7 +85,7 @@ class SignUpForm extends React.Component {
           placeholder='Tell us more about you'
         />
         <Form.Field style={{textAlign: 'right'}}>
-          <Button>Sign up</Button>
+          <Button primary>Sign up</Button>
         </Form.Field>
       </Form>
     )

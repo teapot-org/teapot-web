@@ -12,10 +12,10 @@ import Error404Page from "../../pages/Error404Page";
 export default () => (
   <Container fluid>
     <Switch>
-      <AuthorizedRoute path="/" exact component={HomePage}/>
+      <Route path="/" exact component={HomePage}/>
       <Route path="/sign-in" exact component={SignInPage}/>
       <Route path="/sign-up" exact component={SignUpPage}/>
-      <Route path="/profile" exact component={ProfilePage}/>
+      <AuthorizedRoute path="/profile" exact component={ProfilePage}/>
       <Route path="/profile/:username" exact component={ProfilePage}/>
       <Route component={Error404Page}/>
     </Switch>

@@ -19,7 +19,7 @@ class AuthorizedRouteContainer extends React.Component {
             ? <Component {...props} />
             : (
               <Redirect to={{
-                pathname: '/sign-in',
+                pathname: '/',
                 state: {from: props.location}
               }}/>
             )

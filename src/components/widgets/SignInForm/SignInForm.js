@@ -1,7 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Redirect} from 'react-router-dom'
-import {Form, Button} from 'semantic-ui-react'
+import {Button, Form} from 'semantic-ui-react'
 
 import {signIn} from '../../../actions/oauth'
 
@@ -20,17 +19,8 @@ class SignInForm extends React.Component {
   };
 
   render() {
-    const {isAuthenticated, isLoading, profile} = this.props.oauth;
+    const {isLoading, profile} = this.props.oauth;
     const {email, password} = this.state;
-
-    if (isAuthenticated) {
-      return (
-        <Redirect to={{
-          pathname: `/profile/${profile.name}`,
-          state: {from: this.props.location}
-        }}/>
-      );
-    }
 
     return (
       <Form onSubmit={this.onSubmit} loading={isLoading}>
@@ -57,7 +47,7 @@ class SignInForm extends React.Component {
           required
         />
         <Form.Field style={{textAlign: 'right'}}>
-          <Button>Sign in</Button>
+          <Button positive>Sign in</Button>
         </Form.Field>
       </Form>
     );
