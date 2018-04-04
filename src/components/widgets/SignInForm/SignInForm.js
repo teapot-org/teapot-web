@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
-import {Form} from 'semantic-ui-react'
+import {Form, Button} from 'semantic-ui-react'
 
 import {signIn} from '../../../actions/oauth'
 
@@ -40,9 +40,10 @@ class SignInForm extends React.Component {
           type='email'
           value={email}
           onChange={this.onChange}
-          placeholder='Email'
+          placeholder='E-mail address'
           icon='user'
           iconPosition='left'
+          required
         />
         <Form.Input
           label='Password'
@@ -53,8 +54,11 @@ class SignInForm extends React.Component {
           placeholder='Password'
           icon='lock'
           iconPosition='left'
+          required
         />
-        <Form.Button>Sign in</Form.Button>
+        <Form.Field style={{textAlign: 'right'}}>
+          <Button>Sign in</Button>
+        </Form.Field>
       </Form>
     );
   }
