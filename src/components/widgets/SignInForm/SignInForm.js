@@ -19,7 +19,7 @@ class SignInForm extends React.Component {
   };
 
   render() {
-    const {isLoading, profile} = this.props.oauth;
+    const {isLoading} = this.props.oauth;
     const {email, password} = this.state;
 
     return (
