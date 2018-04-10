@@ -18,19 +18,12 @@ export const getUserByUsername = (username) => (dispatch) => {
   });
 };
 
-export const signUp = (email, name, password, firstName, lastName, description) => async (dispatch) => {
+export const signUp = (data) => async (dispatch) => {
   try {
     await axios({
       method: 'POST',
       url: '/users',
-      data: {
-        email: email,
-        name: name,
-        password: password,
-        firstName: firstName,
-        lastName: lastName,
-        description: description
-      }
+      data
     });
 
     dispatch(replace('/sign-in'));

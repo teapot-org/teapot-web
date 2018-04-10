@@ -1,100 +1,93 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {Button, Form} from 'semantic-ui-react'
 
 import {signUp} from '../../../actions/users'
 
 class SignUpForm extends React.Component {
-  constructor(props) {
-    super(props);
+  state = {
+    email: '',
+    name: '',
+    password: '',
+    firstName: '',
+    lastName: '',
+    birthday: '',
+    description: ''
+  };
 
-    this.state = {
-      email: '',
-      name: '',
-      password: '',
-      firstName: '',
-      lastName: '',
-      description: ''
-    };
-  }
-
-  onChange(event) {
-    const {name, value} = event.target;
-    this.setState({[name]: value});
-  }
+  onChange = (e, {name, value}) => this.setState({[name]: value});
 
   onSubmit(event) {
     event.preventDefault();
-    const {email, name, password, firstName, lastName, description} = this.state;
-    this.props.signUp(email, name, password, firstName, lastName, description);
+    this.props.signUp(this.state);
   }
 
   render() {
-    const {email, name, password, firstName, lastName, description} = this.state;
+    const {email, name, password, firstName, lastName, birthday, description} = this.state;
     return (
-      <div>
-        <form onSubmit={this.onSubmit.bind(this)}>
-          <label>
-            e-mail:
-            <input
-              name="email"
-              type="email"
-              value={email}
-              onChange={this.onChange.bind(this)}
-            />
-          </label>
-
-          <label>
-            name:
-            <input
-              name="name"
-              type="name"
-              value={name}
-              onChange={this.onChange.bind(this)}
-            />
-          </label>
-
-          <label>
-            password:
-            <input
-              name="password"
-              type="password"
-              value={password}
-              onChange={this.onChange.bind(this)}
-            />
-          </label>
-
-          <label>
-            First name:
-            <input
-              name="firstName"
-              type="firstName"
-              value={firstName}
-              onChange={this.onChange.bind(this)}
-            />
-          </label>
-
-          <label>
-            Last name:
-            <input
-              name="lastName"
-              type="lastName"
-              value={lastName}
-              onChange={this.onChange.bind(this)}
-            />
-          </label>
-
-          <label>
-            description:
-            <input
-              name="description"
-              type="description"
-              value={description}
-              onChange={this.onChange.bind(this)}
-            />
-          </label>
-          <button type='submit'>SignUp</button>
-        </form>
-      </div>
+      <Form onSubmit={this.onSubmit.bind(this)}>
+        <Form.Input
+          label='Email'
+          name='email'
+          type='email'
+          value={email}
+          onChange={this.onChange}
+          placeholder='E-mail address'
+          required
+        />
+        <Form.Input
+          label='Username'
+          name='name'
+          type='text'
+          value={name}
+          onChange={this.onChange}
+          placeholder='Username'
+          required
+        />
+        <Form.Input
+          label='Password'
+          name='password'
+          type='password'
+          value={password}
+          onChange={this.onChange}
+          placeholder='Password'
+          required
+        />
+        <Form.Input
+          label='First name'
+          name='firstName'
+          type='text'
+          value={firstName}
+          onChange={this.onChange}
+          placeholder='First name'
+        />
+        <Form.Input
+          label='Last name'
+          name='lastName'
+          type='text'
+          value={lastName}
+          onChange={this.onChange}
+          placeholder='Last name'
+        />
+        <Form.Input
+          label='Birthday'
+          name='birthday'
+          type='date'
+          value={birthday}
+          onChange={this.onChange}
+          placeholder='Birthday'
+        />
+        <Form.TextArea
+          label='Description'
+          name='description'
+          value={description}
+          onChange={this.onChange}
+          placeholder='Tell us more about you'
+        />
+        <Form.Field style={{textAlign: 'right'}}>
+          <Button primary>Sign up</Button>
+        </Form.Field>
+      </Form>
     )
   }
 }

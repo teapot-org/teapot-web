@@ -1,70 +1,55 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Redirect} from 'react-router-dom'
+import {Button, Form} from 'semantic-ui-react'
 
 import {signIn} from '../../../actions/oauth'
 
 class SignInForm extends React.Component {
-  constructor(props) {
-    super(props);
+  state = {
+    email: '',
+    password: ''
+  };
 
-    this.state = {
-      email: '',
-      password: ''
-    };
+  onChange = (e, {name, value}) => this.setState({[name]: value});
 
-    this.onSubmit = this.onSubmit.bind(this);
-    this.onChange = this.onChange.bind(this);
-  }
-
-  onChange(event) {
-    const {name, value} = event.target;
-    this.setState({[name]: value});
-  }
-
-  onSubmit(event) {
+  onSubmit = (event) => {
     event.preventDefault();
     const {email, password} = this.state;
     this.props.signIn(email, password);
-  }
+  };
 
   render() {
-    const {isAuthenticated, isLoading, profile} = this.props.oauth;
+    const {isLoading, profile} = this.props.oauth;
     const {email, password} = this.state;
 
-    if (isAuthenticated) {
-      return (
-        <Redirect to={{
-          pathname: `/profile/${profile.name}`,
-          state: {from: this.props.location}
-        }}/>
-      );
-    }
-
     return (
-      <div>
-        <form
-          onSubmit={this.onSubmit}
-        >
-          <label>Email:
-            <input
-              name='email'
-              type='email'
-              value={email}
-              onChange={this.onChange}
-            />
-          </label>
-          <label>Password:
-            <input
-              name='password'
-              type='password'
-              value={password}
-              onChange={this.onChange}
-            />
-          </label>
-          <button type='submit' disabled={isLoading}>Sign in</button>
-        </form>
-      </div>
+      <Form onSubmit={this.onSubmit} loading={isLoading}>
+        <Form.Input
+          label='Email'
+          name='email'
+          type='email'
+          value={email}
+          onChange={this.onChange}
+          placeholder='E-mail address'
+          icon='user'
+          iconPosition='left'
+          required
+        />
+        <Form.Input
+          label='Password'
+          name='password'
+          type='password'
+          value={password}
+          onChange={this.onChange}
+          placeholder='Password'
+          icon='lock'
+          iconPosition='left'
+          required
+        />
+        <Form.Field style={{textAlign: 'right'}}>
+          <Button positive>Sign in</Button>
+        </Form.Field>
+      </Form>
     );
   }
 }
