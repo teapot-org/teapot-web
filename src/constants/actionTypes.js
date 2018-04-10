@@ -15,3 +15,11 @@ export const GET_USER_FAILURE = 'GET_USER_FAILURE';
 export const getUserRequest = () => ({type: GET_USER_REQUEST});
 export const getUserSuccess = (user) => ({type: GET_USER_SUCCESS, payload: user});
 export const getUserFailure = () => ({type: GET_USER_FAILURE});
+
+export const GET_KANBAN_REQUEST = 'GET_KANBAN_REQUEST';
+export const GET_KANBAN_SUCCESS = 'GET_KANBAN_SUCCESS';
+export const GET_KANBAN_FAILURE = 'GET_KANBAN_FAILURE';
+
+export const getKanbanRequest = () => ({type: GET_KANBAN_REQUEST});
+export const getKanbanSuccess = (kanban) => ({type: GET_KANBAN_SUCCESS, payload: kanban});
+export const getKanbanFailure = () => ({type: GET_KANBAN_FAILURE});
