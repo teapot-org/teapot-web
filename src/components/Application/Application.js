@@ -6,7 +6,7 @@ import Router from '../widgets/Router'
 class Application extends React.Component {
   render() {
     return (
-      <div>
+      <div id='app'>
         <TopPanel/>
         <Router/>
       </div>

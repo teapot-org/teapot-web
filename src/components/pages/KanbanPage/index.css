@@ -1,0 +1,8 @@
+.ui.grid {
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.ui.grid > .row.wrapper {
+    flex-grow: 1;
+}

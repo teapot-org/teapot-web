@@ -9,6 +9,7 @@ import history from './history'
 import Application from './components/Application';
 import Loading from './components/widgets/Loading';
 import registerServiceWorker from './registerServiceWorker';
+import './index.css'
 
 ReactDOM.render(
   <Provider store={store}>
