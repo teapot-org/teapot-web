@@ -1,12 +1,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Route} from "react-router";
-import {Container, Card, Header, Segment, Grid} from 'semantic-ui-react';
 
 import Loading from '../../widgets/Loading'
+import TicketList from '../../widgets/TicketList'
 import Error404Page from "../Error404Page";
 import {getKanbanById} from '../../../actions/kanbans'
-import './index.css'
 
 class KanbanPage extends React.Component {
   componentWillMount() {
@@ -19,27 +18,44 @@ class KanbanPage extends React.Component {
     const {isLoading, kanban} = this.props.kanbans;
 
     if (isLoading) {
-      return <Loading/>;
+      return (
+        <main>
+          <Loading/>
+        </main>
+      );
     }
 
     if (kanban != null) {
       return (
-        <Grid stretched padded>
-          <Grid.Row>
-            <Grid.Column>
-              <Header>Доска {kanban.title}</Header>
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row stretched className='wrapper'>
-            <Grid.Column>
-              <Segment/>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
+        <main>
+          <div className="main-head">
+            <div className="kanban-name">
+              <div className="name-lock">
+                <span>{kanban.title}</span>
+                <img src="images/lock.jpg" alt="lock" className="lock" title="Закрытый канбан"/>
+              </div>
+              <span className="host">Создатель</span>
+            </div>
+            <div className="team"></div>
+          </div>
+          <div className="wrapper">
+            <div className="lists">
+              {kanban.ticketLists.map(list => (
+                <TicketList ticketList={list}/>
+              ))}
+              <div className="list" id="add-new">
+                <div className="add">
+                  <p>+</p>
+                  <p>Список</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
       );
     }
 
-    return <Route component={Error404Page}/>
+    return <Route component={Error404Page}/>;
   }
 }
 
