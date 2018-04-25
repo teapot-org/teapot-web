@@ -3,9 +3,10 @@ import {connect} from 'react-redux'
 import {Route} from "react-router";
 
 import Loading from '../../widgets/Loading'
-import TicketList from '../../widgets/TicketList'
 import Error404Page from "../Error404Page";
 import {getKanbanById} from '../../../actions/kanbans'
+import KanbanContent from '../../widgets/KanbanContent'
+import {generateQuoteMap} from '../../../data'
 
 class KanbanPage extends React.Component {
   componentWillMount() {
@@ -28,6 +29,7 @@ class KanbanPage extends React.Component {
     if (kanban != null) {
       return (
         <main>
+          {/*todo: вынести в KanbanHeader */}
           <div className="main-head">
             <div className="kanban-name">
               <div className="name-lock">
@@ -38,19 +40,7 @@ class KanbanPage extends React.Component {
             </div>
             <div className="team"></div>
           </div>
-          <div className="wrapper">
-            <div className="lists">
-              {kanban.ticketLists.map(list => (
-                <TicketList ticketList={list}/>
-              ))}
-              <div className="list" id="add-new">
-                <div className="add">
-                  <p>+</p>
-                  <p>Список</p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <KanbanContent initial={generateQuoteMap(10)}/>
         </main>
       );
     }

@@ -1,4 +1,4 @@
-import {GET_KANBAN_REQUEST, GET_KANBAN_FAILURE, GET_KANBAN_SUCCESS} from '../constants/actionTypes'
+import {GET_KANBAN_FAILURE, GET_KANBAN_REQUEST, GET_KANBAN_SUCCESS} from '../constants/actionTypes'
 
 const initialState = {
   isLoading: false,
