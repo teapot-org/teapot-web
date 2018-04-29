@@ -2,14 +2,16 @@ import React from 'react'
 
 import TopPanel from '../widgets/TopPanel'
 import Router from '../widgets/Router'
+import Footer from '../widgets/Footer'
 
 class Application extends React.Component {
   render() {
     return (
-      <div>
+      <React.Fragment>
         <TopPanel/>
         <Router/>
-      </div>
+        <Footer/>
+      </React.Fragment>
     );
   }
 }

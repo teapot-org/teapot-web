@@ -12,7 +12,7 @@ import history from '../history'
 const persistConfig = {
   key: 'root',
   storage: storage,
-  whitelist: ['oauth'],
+  blacklist: ['router'],
   stateReconciler: autoMergeLevel2
 };
 
