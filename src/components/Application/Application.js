@@ -7,11 +7,11 @@ import Footer from '../widgets/Footer'
 class Application extends React.Component {
   render() {
     return (
-      <div id='root'>
+      <React.Fragment>
         <TopPanel/>
         <Router/>
         <Footer/>
-      </div>
+      </React.Fragment>
     );
   }
 }

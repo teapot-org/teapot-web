@@ -1,8 +1,8 @@
 import {GET_KANBAN_FAILURE, GET_KANBAN_REQUEST, GET_KANBAN_SUCCESS} from '../constants/actionTypes'
 
 const initialState = {
-  isLoading: false,
-  kanban: null
+  kanbans: {},
+  isError: false
 };
 
 export default function (state = initialState, action) {
@@ -10,16 +10,33 @@ export default function (state = initialState, action) {
     case GET_KANBAN_REQUEST:
       return {
         ...state,
-        isLoading: true
+        isError: false
       };
     case GET_KANBAN_SUCCESS:
+      let ticketLists = [];
+      if (state.kanbans[action.payload.id]) {
+        ticketLists = state.kanbans[action.payload.id].ticketLists;
+      }
+
+      if (action.payload.hasOwnProperty('ticketLists')) {
+        ticketLists = action.payload.ticketLists;
+      }
+
       return {
-        ...state,
-        isLoading: false,
-        kanban: action.payload
+        kanbans: {
+          ...state.kanbans,
+          [action.payload.id]: {
+            ...action.payload,
+            ticketLists
+          }
+        },
+        isError: false
       };
     case GET_KANBAN_FAILURE:
-      return initialState;
+      return {
+        ...state,
+        isError: true
+      };
     default:
       return state;
   }

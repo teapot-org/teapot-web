@@ -1,47 +1,50 @@
-import React from 'react'
+import React from 'react';
+import {Draggable} from 'react-beautiful-dnd'
+import styled from 'styled-components';
 
-import axios from '../../../http-common'
-import Loading from "../Loading";
-import Ticket from "../Ticket";
+import TicketListContent from '../primatives/TicketListContent';
+
+const Container = styled.div.attrs({
+  className: 'list'
+})``;
+
+const Header = styled.div.attrs({
+  className: 'list-header'
+})``;
+
+const Title = styled.h3``;
 
 class TicketList extends React.Component {
-  state = {
-    isLoading: false,
-    tickets: []
-  };
-
-  componentWillMount() {
-    this.loadTickets();
-  }
-
-  async loadTickets() {
-    this.setState({isLoading: true});
-    const ticketsResponse = await axios.get(this.props.ticketList._links.tickets.href);
-    this.setState({
-      isLoading: false,
-      tickets: ticketsResponse.data._embedded.tickets
-    })
-  }
-
   render() {
-    const {isLoading, tickets} = this.state;
-    const {ticketList} = this.props;
-
-    if (isLoading) {
-      return <Loading/>;
-    }
+    const ticketList = this.props.ticketList;
+    const index = this.props.index;
 
     return (
-      <div className="list">
-        <div className="list-header">
-          <h3>{ticketList.title}</h3>
-        </div>
-        <div className="card-wrapper">
-          {tickets.map(ticket => (
-            <Ticket ticket={ticket}/>
-          ))}
-        </div>
-      </div>
+      <Draggable draggableId={'ticket-list-' + index} index={index}>
+        {(provided, snapshot) => (
+          <Container
+            innerRef={provided.innerRef}
+            {...provided.draggableProps}
+          >
+            <Header
+              isDragging={snapshot.isDragging}
+            >
+              <Title
+                isDragging={snapshot.isDragging}
+                {...provided.dragHandleProps}
+              >
+                {ticketList.title}
+              </Title>
+            </Header>
+            <TicketListContent
+              listId={'ticket-list-' + index}
+              listType="QUOTE"
+              ticketList={ticketList}
+            />
+          </Container>
+        )}
+
+      </Draggable>
     );
   }
 }

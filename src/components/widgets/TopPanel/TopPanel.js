@@ -44,12 +44,20 @@ class TopPanel extends React.Component {
         <div id="logo">Teapot</div>
         <a href="#" className="button" id="organizations">Организации</a>
         <a href="#" className="button" id="kanbans">Канбаны</a>
-        <a href="#" className="button" id="notifications">Уведомления</a>
-        <div id="username" class="button">
-          <img src="user.jpg" alt="user" title="Закрытый канбан"/>
-          Username
-          <div class="usermenu"></div>
-        </div>
+        <ul id="username" className="button">
+          <a href="#">Username</a>
+          <ul className="submenu">
+            <li>
+              <a href="#">Профиль</a>
+            </li>
+            <li>
+              <a href="#">Настройки</a>
+            </li>
+            <li>
+              <a href="#">Выход</a>
+            </li>
+          </ul>
+        </ul>
       </header>
     );
   }

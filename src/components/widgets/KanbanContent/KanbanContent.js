@@ -1,29 +1,30 @@
 import React from 'react'
 import styled from 'styled-components';
 import {DragDropContext, Droppable} from 'react-beautiful-dnd'
-import Column from '../Column';
+import {connect} from 'react-redux'
+
+import TicketList from '../TicketList';
 import reorder, {reorderQuoteMap} from '../../../reorder';
+import {getKanbanTicketLists} from '../../../actions/ticketLists'
 
 const ParentContainer = styled.div`
   height: ${({height}) => height};
   overflow-x: hidden;
   overflow-y: auto;
 `;
+//
+// const Container = styled.div`
+//   display: inline-flex;
+// `;
 
-const Container = styled.div`
-  display: inline-flex;
-`;
+const Container = styled.div.attrs({
+  className: 'lists'
+})``;
 
 class KanbanContent extends React.Component {
-  state = {
-    columns: this.props.initial,
-    ordered: Object.keys(this.props.initial),
-  };
-
   onDragStart = (initial) => {
     // publishOnDragStart(initial);
   };
-
   onDragEnd = (result) => {
     // publishOnDragEnd(result);
 
@@ -67,10 +68,24 @@ class KanbanContent extends React.Component {
     });
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      columns: this.props.initial,
+      ordered: Object.keys(this.props.initial)
+    };
+  }
+
+  componentWillMount() {
+    const {kanban, getKanbanTicketLists} = this.props;
+    getKanbanTicketLists(kanban.id);
+  }
+
   render() {
     const columns = this.state.columns;
     const ordered = this.state.ordered;
-    const {containerHeight} = this.props;
+    const {kanban, containerHeight, ticketLists} = this.props;
 
     const board = (
       <Droppable
@@ -81,12 +96,11 @@ class KanbanContent extends React.Component {
       >
         {(provided) => (
           <Container innerRef={provided.innerRef} {...provided.droppableProps}>
-            {ordered.map((key, index) => (
-              <Column
+            {kanban.ticketLists.map((key, index) => (
+              <TicketList
                 key={key}
                 index={index}
-                title={key}
-                quotes={columns[key]}
+                ticketList={ticketLists[key]}
               />
             ))}
           </Container>
@@ -100,15 +114,20 @@ class KanbanContent extends React.Component {
           onDragStart={this.onDragStart}
           onDragEnd={this.onDragEnd}
         >
-          {this.props.containerHeight ? (
-            <ParentContainer height={containerHeight}>{board}</ParentContainer>
-          ) : (
-            board
-          )}
+          {board}
         </DragDropContext>
       </div>
     );
   }
 }
 
-export default KanbanContent;
+export default connect(
+  state => ({
+    ticketLists: state.ticketLists.ticketLists
+  }),
+  dispatch => ({
+    getKanbanTicketLists: (id) => {
+      dispatch(getKanbanTicketLists(id));
+    }
+  })
+)(KanbanContent);
