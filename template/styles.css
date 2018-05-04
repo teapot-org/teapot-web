@@ -59,10 +59,9 @@ footer {
 #logo {
     width: 15%;
     color: #1dc45f;
-    font-size: 45pt;
+    font-size: 35pt;
     margin-right: 5%;
     margin-left: 10px;
-    display: flex;
     font-family: 'Caveat', cursive;
     line-height: 100%;
 }
@@ -365,4 +364,48 @@ li:hover {
     user-select: none;
     /* Non-prefixed version, currently
                                        supported by Chrome and Opera */
+}
+
+/* Style inputs with type="text", select elements and textareas */
+input[type=text], select, textarea {
+    width: 100%; /* Full width */
+    padding: 12px; /* Some padding */
+    border: 1px solid #ccc; /* Gray border */
+    border-radius: 4px; /* Rounded borders */
+    box-sizing: border-box; /* Make sure that padding and width stays in place */
+    margin-top: 6px; /* Add a top margin */
+    margin-bottom: 16px; /* Bottom margin */
+    resize: vertical;
+    display: block;
+    /* Allow the user to vertically resize the textarea (not horizontally) */
+}
+
+/* Style the submit button with a specific background color etc */
+input[type=submit] {
+    background-color: #1dc45f;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* When moving the mouse over the submit button, add a darker green color */
+input[type=submit]:hover {
+    background-color: rgba(19, 185, 4, 0.62);
+}
+
+/* Add a background color and some padding around the form */
+.form {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    min-width: 300px;
+    width: 30%;
+    left: 34%;
+    position: absolute;
+}
+
+main h2 {
+    text-align: center;
 }
