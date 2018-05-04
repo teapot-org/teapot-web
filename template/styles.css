@@ -46,7 +46,6 @@ main {
     position: relative;
     left: 1%;
     box-shadow: 0 5px 8px rgba(0, 0, 0, 0.3);
-    /* Параметры тени */
 }
 
 footer {
@@ -167,6 +166,7 @@ footer {
     flex-shrink: 0;
     flex-grow: 0;
     margin: 5px;
+    width: 250px;
 }
 
 /*card content*/

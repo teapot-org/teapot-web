@@ -4,11 +4,11 @@ import {DragDropContext, Droppable} from 'react-beautiful-dnd'
 import {connect} from 'react-redux'
 
 import TicketList from '../TicketList';
-import reorder, {reorderKanban} from '../../../reorder';
-import {getKanbanTicketLists} from '../../../actions/ticketLists'
+import {getKanbanTicketLists, shiftTicketList} from '../../../actions/ticketLists'
+import {moveTicketToAnotherList, shiftTicket} from '../../../actions/tickets'
 
 const Wrapper = styled.div.attrs({className: 'wrapper'})`
-  height: ${({ height }) => height};
+  height: ${({height}) => height};
   overflow-x: hidden;
   overflow-y: auto;
 `;
@@ -16,12 +16,7 @@ const Wrapper = styled.div.attrs({className: 'wrapper'})`
 const Container = styled.div.attrs({className: 'lists'})``;
 
 class KanbanContent extends React.Component {
-  onDragStart = (initial) => {
-    // publishOnDragStart(initial);
-  };
   onDragEnd = (result) => {
-    // publishOnDragEnd(result);
-
     // dropped nowhere
     if (!result.destination) {
       return;
@@ -30,44 +25,36 @@ class KanbanContent extends React.Component {
     const source = result.source;
     const destination = result.destination;
 
+    console.info(result);
+
     // did not move anywhere - can bail early
     if (source.droppableId === destination.droppableId &&
       source.index === destination.index) {
       return;
     }
 
-    // reordering column
+    // reordering list
     if (result.type === 'LIST') {
-      const ordered = reorder(
-        this.state.ordered,
-        source.index,
-        destination.index
-      );
-
-      this.setState({
-        ordered,
-      });
-
-      return;
+      const kanbanId = this.props.kanban.id;
+      const listId = Number(result.draggableId.match(/list-(\d+)/)[1]);
+      const position = destination.index;
+      this.props.shiftTicketList(kanbanId, listId, position);
     }
 
-    const data = reorderKanban({
-      kanbans: this.props.kanbans,
-      ticketLists: this.props.ticketLists,
-      tickets: this.props.tickets,
-      source,
-      destination
-    })
-
-    // const data = reorderQuoteMap({
-    //   quoteMap: this.state.columns,
-    //   source,
-    //   destination,
-    // });
-
-    // this.setState({
-    //   columns: data.quoteMap,
-    // });
+    if (result.type === 'TICKET') {
+      const sourceListId = Number(source.droppableId.match(/list-(\d+)/)[1]);
+      const destinationListId = Number(destination.droppableId.match(/list-(\d+)/)[1]);
+      const ticketId = Number(result.draggableId.match(/ticket-(\d+)/)[1]);
+      const position = destination.index;
+      // shifting in one list
+      if (sourceListId === destinationListId) {
+        this.props.shiftTicket(destinationListId, ticketId, position);
+      }
+      // moving to another list
+      else {
+        this.props.moveTicketToAnotherList(sourceListId, destinationListId, ticketId, position);
+      }
+    }
   };
 
   constructor(props) {
@@ -85,8 +72,6 @@ class KanbanContent extends React.Component {
   }
 
   render() {
-    const columns = this.state.columns;
-    const ordered = this.state.ordered;
     const {kanban, ticketLists} = this.props;
     const {containerHeight} = this.props;
 
@@ -99,11 +84,11 @@ class KanbanContent extends React.Component {
       >
         {(provided) => (
           <Container innerRef={provided.innerRef} {...provided.droppableProps}>
-            {kanban.ticketLists.map((key, index) => (
+            {kanban.ticketLists.map((ticketListId, index) => (
               <TicketList
-                key={key}
+                key={ticketListId}
                 index={index}
-                ticketList={ticketLists[key]}
+                ticketList={ticketLists[ticketListId]}
               />
             ))}
           </Container>
@@ -133,6 +118,15 @@ export default connect(
   dispatch => ({
     getKanbanTicketLists: (id) => {
       dispatch(getKanbanTicketLists(id));
+    },
+    shiftTicketList: (kanbanId, listId, position) => {
+      dispatch(shiftTicketList(kanbanId, listId, position));
+    },
+    shiftTicket: (listId, ticketId, position) => {
+      dispatch(shiftTicket(listId, ticketId, position));
+    },
+    moveTicketToAnotherList: (sourceListId, destinationListId, ticketId, position) => {
+      dispatch(moveTicketToAnotherList(sourceListId, destinationListId, ticketId, position));
     }
   })
 )(KanbanContent);

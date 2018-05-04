@@ -40,6 +40,14 @@ export const getTicketListRequest = () => ({type: GET_TICKET_LIST_REQUEST});
 export const getTicketListSuccess = (ticketList) => ({type: GET_TICKET_LIST_SUCCESS, payload: ticketList});
 export const getTicketListFailure = () => ({type: GET_TICKET_LIST_FAILURE});
 
+export const SHIFT_TICKET_LIST_REQUEST = 'SHIFT_TICKET_LIST_REQUEST';
+export const SHIFT_TICKET_LIST_SUCCESS = 'SHIFT_TICKET_LIST_SUCCESS';
+export const SHIFT_TICKET_LIST_FAILURE = 'SHIFT_TICKET_LIST_FAILURE';
+
+export const shiftTicketListRequest = () => ({type: SHIFT_TICKET_LIST_REQUEST});
+export const shiftTicketListSuccess = (payload) => ({type: SHIFT_TICKET_LIST_SUCCESS, payload});
+export const shiftTicketListFailure = () => ({type: SHIFT_TICKET_LIST_FAILURE});
+
 export const GET_TICKETS_REQUEST = 'GET_TICKETS_REQUEST';
 export const GET_TICKETS_SUCCESS = 'GET_TICKETS_SUCCESS';
 export const GET_TICKETS_FAILURE = 'GET_TICKETS_FAILURE';
@@ -47,3 +55,19 @@ export const GET_TICKETS_FAILURE = 'GET_TICKETS_FAILURE';
 export const getTicketsRequest = () => ({type: GET_TICKETS_REQUEST});
 export const getTicketsSuccess = (tickets) => ({type: GET_TICKETS_SUCCESS, payload: tickets});
 export const getTicketsFailure = () => ({type: GET_TICKETS_FAILURE});
+
+export const SHIFT_TICKET_REQUEST = 'SHIFT_TICKET_REQUEST';
+export const SHIFT_TICKET_SUCCESS = 'SHIFT_TICKET_SUCCESS';
+export const SHIFT_TICKET_FAILURE = 'SHIFT_TICKET_FAILURE';
+
+export const shiftTicketRequest = () => ({type: SHIFT_TICKET_REQUEST});
+export const shiftTicketSuccess = (payload) => ({type: SHIFT_TICKET_SUCCESS, payload});
+export const shiftTicketFailure = () => ({type: SHIFT_TICKET_FAILURE});
+
+export const MOVE_TICKET_REQUEST = 'MOVE_TICKET_REQUEST';
+export const MOVE_TICKET_SUCCESS = 'MOVE_TICKET_SUCCESS';
+export const MOVE_TICKET_FAILURE = 'MOVE_TICKET_FAILURE';
+
+export const moveTicketRequest = () => ({type: MOVE_TICKET_REQUEST});
+export const moveTicketSuccess = (payload) => ({type: MOVE_TICKET_SUCCESS, payload});
+export const moveTicketFailure = () => ({type: MOVE_TICKET_FAILURE});

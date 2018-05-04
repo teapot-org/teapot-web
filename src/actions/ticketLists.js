@@ -2,7 +2,10 @@ import {
   getKanbanSuccess,
   getTicketListsFailure,
   getTicketListsRequest,
-  getTicketListsSuccess
+  getTicketListsSuccess,
+  shiftTicketListFailure,
+  shiftTicketListRequest,
+  shiftTicketListSuccess
 } from "../constants/actionTypes";
 import axios from '../http-common';
 
@@ -18,5 +21,26 @@ export const getKanbanTicketLists = (id) => async (dispatch, getState) => {
     dispatch(getKanbanSuccess(kanban))
   } catch (e) {
     dispatch(getTicketListsFailure());
+  }
+};
+
+export const shiftTicketList = (kanbanId, listId, position) => async (dispatch, getState) => {
+  try {
+    dispatch(shiftTicketListRequest());
+    await axios({
+      method: 'PATCH',
+      url: 'ticket-lists/shift',
+      params: {
+        list: listId,
+        position
+      },
+      headers: {
+        'Authorization': `Bearer ${getState().oauth.accessToken}`
+      }
+    });
+    dispatch(getKanbanTicketLists(kanbanId));
+    dispatch(shiftTicketListSuccess({kanbanId, listId, position}))
+  } catch (e) {
+    dispatch(shiftTicketListFailure());
   }
 };

@@ -14,7 +14,7 @@ class TicketList extends React.Component {
     const index = this.props.index;
 
     return (
-      <Draggable draggableId={'list-' + index} index={index}>
+      <Draggable draggableId={'list-' + ticketList.id} index={index}>
         {(provided, snapshot) => (
           <Container
             innerRef={provided.innerRef}
@@ -31,11 +31,7 @@ class TicketList extends React.Component {
                 {ticketList.title}
               </Title>
             </Header>
-            <TicketListContent
-              listId={'list-' + index}
-              listType="TICKET"
-              ticketList={ticketList}
-            />
+            <TicketListContent ticketList={ticketList}/>
           </Container>
         )}
       </Draggable>

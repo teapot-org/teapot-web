@@ -67,16 +67,15 @@ class TicketListContent extends React.Component {
     const {
       ignoreContainerClipping,
       isDropDisabled,
-      listId,
-      listType,
       style,
       ticketList
     } = this.props;
 
     return (
       <Droppable
-        droppableId={listId}
-        type={listType}
+        droppableId={'list-' + ticketList.id}
+        type="TICKET"
+        direction="vertical"
         ignoreContainerClipping={ignoreContainerClipping}
         isDropDisabled={isDropDisabled}
       >
