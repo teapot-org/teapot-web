@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.a.attrs({className: 'card-container'})`
-  box-shadow: ${({ isDragging }) => (isDragging ? '0 0 3px rgba(0,0,0,0.2)' : 'none')};
-  background-color: ${({ isDragging }) => (isDragging ? 'white' : '#fafafa')};
+  box-shadow: ${({isDragging}) => (isDragging ? '0 0 3px rgba(0,0,0,0.2)' : 'none')};
+  background-color: ${({isDragging}) => (isDragging ? 'white' : '#fafafa')};
 `;
 const Content = styled.div.attrs({className: 'card-content'})``;
 const Title = styled.h4.attrs({className: 'card-name'})``;
