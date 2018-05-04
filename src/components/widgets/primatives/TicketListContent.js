@@ -7,8 +7,19 @@ import Ticket from './Ticket';
 import {getTicketListTickets} from '../../../actions/tickets'
 
 const Wrapper = styled.div.attrs({className: 'card-wrapper'})``;
+const DropZone = styled.div.attrs({className: 'drop-zone'})``;
+const ScrollContainer = styled.div.attrs({className: 'scroll-container'})``;
 
-class TicketListContent extends React.Component {
+const InnerTicketList = connect(
+  state => ({
+    tickets: state.tickets.tickets
+  }),
+  dispatch => ({
+    getTicketListTickets: (id) => {
+      dispatch(getTicketListTickets(id));
+    }
+  })
+)(class extends React.Component {
   componentWillMount() {
     const {ticketList, getTicketListTickets} = this.props;
     getTicketListTickets(ticketList.id);
@@ -19,13 +30,47 @@ class TicketListContent extends React.Component {
   }
 
   render() {
+    const {ticketList, tickets} = this.props;
+
+    return ticketList.tickets.map((ticketId, index) => (
+      <Draggable key={ticketId} draggableId={'ticket-' + ticketId} index={index}>
+        {(dragProvided, dragSnapshot) => (
+          <Ticket
+            key={ticketId}
+            ticket={tickets[ticketId]}
+            isDragging={dragSnapshot.isDragging}
+            provided={dragProvided}
+          />
+        )}
+      </Draggable>
+    ));
+  }
+});
+
+class InnerList extends React.Component {
+  render() {
+    const {ticketList, dropProvided} = this.props;
+
+    return (
+      <DropZone innerRef={dropProvided.innerRef}>
+        <InnerTicketList
+          ticketList={ticketList}
+        />
+        {dropProvided.placeholder}
+      </DropZone>
+    );
+  }
+}
+
+class TicketListContent extends React.Component {
+  render() {
     const {
       ignoreContainerClipping,
       isDropDisabled,
       listId,
       listType,
-      ticketList,
-      tickets,
+      style,
+      ticketList
     } = this.props;
 
     return (
@@ -37,24 +82,17 @@ class TicketListContent extends React.Component {
       >
         {(dropProvided, dropSnapshot) => (
           <Wrapper
+            style={style}
             isDraggingOver={dropSnapshot.isDraggingOver}
             isDropDisabled={isDropDisabled}
-            innerRef={dropProvided.innerRef}
             {...dropProvided.droppableProps}
           >
-            {ticketList.tickets.map((key, index) => (
-              <Draggable key={index} draggableId={'ticket-' + index} index={index}>
-                {(dragProvided, dragSnapshot) => (
-                  <Ticket
-                    key={index}
-                    ticket={tickets[key]}
-                    isDragging={dragSnapshot.isDragging}
-                    provided={dragProvided}
-                  />
-                )}
-              </Draggable>
-            ))}
-            {dropProvided.placeholder}
+            <ScrollContainer>
+              <InnerList
+                ticketList={ticketList}
+                dropProvided={dropProvided}
+              />
+            </ScrollContainer>
           </Wrapper>
         )}
       </Droppable>
@@ -62,13 +100,4 @@ class TicketListContent extends React.Component {
   }
 }
 
-export default connect(
-  state => ({
-    tickets: state.tickets.tickets
-  }),
-  dispatch => ({
-    getTicketListTickets: (id) => {
-      dispatch(getTicketListTickets(id));
-    }
-  })
-)(TicketListContent);
+export default TicketListContent;

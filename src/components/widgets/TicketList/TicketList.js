@@ -4,15 +4,9 @@ import styled from 'styled-components';
 
 import TicketListContent from '../primatives/TicketListContent';
 
-const Container = styled.div.attrs({
-  className: 'list'
-})``;
-
-const Header = styled.div.attrs({
-  className: 'list-header'
-})``;
-
-const Title = styled.h3``;
+const Container = styled.div.attrs({className: 'list'})``;
+const Header = styled.div.attrs({className: 'list-header'})``;
+const Title = styled.h4``;
 
 class TicketList extends React.Component {
   render() {
@@ -20,7 +14,7 @@ class TicketList extends React.Component {
     const index = this.props.index;
 
     return (
-      <Draggable draggableId={'ticket-list-' + index} index={index}>
+      <Draggable draggableId={'list-' + index} index={index}>
         {(provided, snapshot) => (
           <Container
             innerRef={provided.innerRef}
@@ -28,6 +22,7 @@ class TicketList extends React.Component {
           >
             <Header
               isDragging={snapshot.isDragging}
+              style={{backgroundColor: snapshot.isDragging ? 'white' : '#f5f5f5'}}
             >
               <Title
                 isDragging={snapshot.isDragging}
@@ -37,13 +32,12 @@ class TicketList extends React.Component {
               </Title>
             </Header>
             <TicketListContent
-              listId={'ticket-list-' + index}
-              listType="QUOTE"
+              listId={'list-' + index}
+              listType="TICKET"
               ticketList={ticketList}
             />
           </Container>
         )}
-
       </Draggable>
     );
   }

@@ -199,6 +199,7 @@ footer {
     padding-right: 4px;
     transition: background-color 0.1s ease, opacity 0.1s ease;
     user-select: none;
+    height: 100%;
 }
 
 .drop-zone {

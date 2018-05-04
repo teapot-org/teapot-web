@@ -4,22 +4,16 @@ import {DragDropContext, Droppable} from 'react-beautiful-dnd'
 import {connect} from 'react-redux'
 
 import TicketList from '../TicketList';
-import reorder, {reorderQuoteMap} from '../../../reorder';
+import reorder, {reorderKanban} from '../../../reorder';
 import {getKanbanTicketLists} from '../../../actions/ticketLists'
 
-const ParentContainer = styled.div`
-  height: ${({height}) => height};
+const Wrapper = styled.div.attrs({className: 'wrapper'})`
+  height: ${({ height }) => height};
   overflow-x: hidden;
   overflow-y: auto;
 `;
-//
-// const Container = styled.div`
-//   display: inline-flex;
-// `;
 
-const Container = styled.div.attrs({
-  className: 'lists'
-})``;
+const Container = styled.div.attrs({className: 'lists'})``;
 
 class KanbanContent extends React.Component {
   onDragStart = (initial) => {
@@ -43,7 +37,7 @@ class KanbanContent extends React.Component {
     }
 
     // reordering column
-    if (result.type === 'COLUMN') {
+    if (result.type === 'LIST') {
       const ordered = reorder(
         this.state.ordered,
         source.index,
@@ -57,23 +51,31 @@ class KanbanContent extends React.Component {
       return;
     }
 
-    const data = reorderQuoteMap({
-      quoteMap: this.state.columns,
+    const data = reorderKanban({
+      kanbans: this.props.kanbans,
+      ticketLists: this.props.ticketLists,
+      tickets: this.props.tickets,
       source,
-      destination,
-    });
+      destination
+    })
 
-    this.setState({
-      columns: data.quoteMap,
-    });
+    // const data = reorderQuoteMap({
+    //   quoteMap: this.state.columns,
+    //   source,
+    //   destination,
+    // });
+
+    // this.setState({
+    //   columns: data.quoteMap,
+    // });
   };
 
   constructor(props) {
     super(props);
 
     this.state = {
-      columns: this.props.initial,
-      ordered: Object.keys(this.props.initial)
+      columns: this.props.kanban.ticketLists,
+      ordered: Object.keys(this.props.kanban.ticketLists)
     };
   }
 
@@ -85,12 +87,13 @@ class KanbanContent extends React.Component {
   render() {
     const columns = this.state.columns;
     const ordered = this.state.ordered;
-    const {kanban, containerHeight, ticketLists} = this.props;
+    const {kanban, ticketLists} = this.props;
+    const {containerHeight} = this.props;
 
     const board = (
       <Droppable
         droppableId="board"
-        type="COLUMN"
+        type="LIST"
         direction="horizontal"
         ignoreContainerClipping={Boolean(containerHeight)}
       >
@@ -109,21 +112,23 @@ class KanbanContent extends React.Component {
     );
 
     return (
-      <div className="wrapper">
-        <DragDropContext
-          onDragStart={this.onDragStart}
-          onDragEnd={this.onDragEnd}
-        >
+      <DragDropContext
+        onDragStart={this.onDragStart}
+        onDragEnd={this.onDragEnd}
+      >
+        <Wrapper height={containerHeight}>
           {board}
-        </DragDropContext>
-      </div>
+        </Wrapper>
+      </DragDropContext>
     );
   }
 }
 
 export default connect(
   state => ({
-    ticketLists: state.ticketLists.ticketLists
+    kanbans: state.kanbans.kanbans,
+    ticketLists: state.ticketLists.ticketLists,
+    tickets: state.tickets.tickets
   }),
   dispatch => ({
     getKanbanTicketLists: (id) => {
