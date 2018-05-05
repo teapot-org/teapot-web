@@ -27,7 +27,7 @@ export const getTicketListTickets = (id) => async (dispatch, getState) => {
   }
 };
 
-export const shiftTicket = (listId, ticketId, position) => async (dispatch, getState) => {
+export const shiftTicket = (listId, ticketId, position) => async (dispatch) => {
   try {
     dispatch(shiftTicketRequest());
     await axios({
@@ -36,9 +36,6 @@ export const shiftTicket = (listId, ticketId, position) => async (dispatch, getS
       params: {
         ticket: ticketId,
         position
-      },
-      headers: {
-        'Authorization': `Bearer ${getState().oauth.accessToken}`
       }
     });
     dispatch(getTicketListTickets(listId));
@@ -48,7 +45,7 @@ export const shiftTicket = (listId, ticketId, position) => async (dispatch, getS
   }
 };
 
-export const moveTicketToAnotherList = (sourceListId, destinationListId, ticketId, position) => async (dispatch, getState) => {
+export const moveTicketToAnotherList = (sourceListId, destinationListId, ticketId, position) => async (dispatch) => {
   try {
     dispatch(moveTicketRequest());
     await axios({
@@ -58,9 +55,6 @@ export const moveTicketToAnotherList = (sourceListId, destinationListId, ticketI
         ticket: ticketId,
         list: destinationListId,
         position
-      },
-      headers: {
-        'Authorization': `Bearer ${getState().oauth.accessToken}`
       }
     });
     dispatch(getTicketListTickets(sourceListId));

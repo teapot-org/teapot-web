@@ -25,8 +25,6 @@ class KanbanContent extends React.Component {
     const source = result.source;
     const destination = result.destination;
 
-    console.info(result);
-
     // did not move anywhere - can bail early
     if (source.droppableId === destination.droppableId &&
       source.index === destination.index) {

@@ -9,7 +9,7 @@ import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import rootReducer from '../reducers'
 import history from '../history'
 import axios from "../http-common";
-import {signOut} from '../constants/actionTypes'
+import {signOut} from '../actions/oauth'
 
 const persistConfig = {
   key: 'root',
