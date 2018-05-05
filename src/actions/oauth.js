@@ -1,7 +1,7 @@
 import axios from '../http-common'
 
 import {CLIENT_ID, CLIENT_SECRET} from '../constants/app'
-import {signInFailure, signInRequest, signInSuccess} from '../constants/actionTypes'
+import {signInFailure, signInRequest, signInSuccess, signOut as logout} from '../constants/actionTypes'
 
 export const signIn = (email, password) => async (dispatch) => {
   try {
@@ -23,6 +23,8 @@ export const signIn = (email, password) => async (dispatch) => {
       params: {email}
     });
 
+    axios.defaults.headers.common['Authorization'] = `Bearer ${tokenResponse.data.access_token}`;
+
     dispatch(signInSuccess({
       accessToken: tokenResponse.data.access_token,
       profile: profileResponse.data
@@ -30,4 +32,11 @@ export const signIn = (email, password) => async (dispatch) => {
   } catch (e) {
     dispatch(signInFailure());
   }
+};
+
+export const signOut = () => async (dispatch) => {
+  if (axios.defaults.headers.common.hasOwnProperty('Authorization')) {
+    delete axios.defaults.headers.common['Authorization'];
+  }
+  dispatch(logout());
 };

@@ -24,7 +24,7 @@ export const getKanbanTicketLists = (id) => async (dispatch, getState) => {
   }
 };
 
-export const shiftTicketList = (kanbanId, listId, position) => async (dispatch, getState) => {
+export const shiftTicketList = (kanbanId, listId, position) => async (dispatch) => {
   try {
     dispatch(shiftTicketListRequest());
     await axios({
@@ -33,9 +33,6 @@ export const shiftTicketList = (kanbanId, listId, position) => async (dispatch, 
       params: {
         list: listId,
         position
-      },
-      headers: {
-        'Authorization': `Bearer ${getState().oauth.accessToken}`
       }
     });
     dispatch(getKanbanTicketLists(kanbanId));
