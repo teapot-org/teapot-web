@@ -8,6 +8,8 @@ import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 
 import rootReducer from '../reducers'
 import history from '../history'
+import axios from "../http-common";
+import {signOut} from '../constants/actionTypes'
 
 const persistConfig = {
   key: 'root',
@@ -23,5 +25,12 @@ export const store = createStore(
     routerMiddleware(history)
   ))
 );
+
+axios.interceptors.response.use(undefined, error => {
+ if (error.message === 'Network Error' || error.response.status === 401) {
+   store.dispatch(signOut());
+ }
+ return Promise.reject(error);
+});
 
 export const persistor = persistStore(store);
