@@ -13,22 +13,26 @@ class TopPanel extends React.Component {
         <div id="logo">Teapot</div>
         {isAuthenticated ? (
           <React.Fragment>
-            <a href="#" className="button" id="organizations">Организации</a>
-            <a href="#" className="button" id="kanbans">Канбаны</a>
-            <ul id="username" className="button">
-              <a>{profile.name}</a>
-              <ul className="submenu">
-                <li><Link to='/profile'>Профиль</Link></li>
-                {/*<li><a>Настройки</a></li>*/}
-                <li><a onClick={this.props.signOut}>Выход</a></li>
+            <div>
+              <a href="#" className="button" id="organizations">Организации</a>
+              <a href="#" className="button" id="kanbans">Канбаны</a>
+            </div>
+            <div>
+              <ul id="username" className="button">
+                <a>{profile.name}</a>
+                <ul className="submenu">
+                  <li><Link to='/profile'>Профиль</Link></li>
+                  {/*<li><a>Настройки</a></li>*/}
+                  <li><a onClick={this.props.signOut}>Выход</a></li>
+                </ul>
               </ul>
-            </ul>
+            </div>
           </React.Fragment>
         ) : (
-          <React.Fragment>
+          <div>
             <Link className="button" to='/sign-up'>Регистрация</Link>
             <Link className="button" to='/sign-in'>Вход</Link>
-          </React.Fragment>
+          </div>
         )}
       </header>
     );

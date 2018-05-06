@@ -19,50 +19,76 @@ body {
     overflow: hidden;
 }
 
+#root {
+    display: flex;
+    flex-direction: column;
+}
+
 header {
     background-color: #3e3f3f;
-    height: 7vh;
+    height: 50px;
     width: 100%;
     min-width: 1200px;
     position: relative;
     display: flex;
     flex-flow: row;
+
+    justify-content: space-between;
+}
+
+header > div {
+    flex-grow: 1;
+    text-align: center;
+}
+
+header > div:first-child {
+    text-align: left;
+    margin-left: 15px;
+}
+
+header > div:last-child {
+    text-align: right;
+    margin-right: 15px;
 }
 
 main {
     background: #d9d8d9;
     height: 88vh;
+    width: calc(100vw - 30px);
+    margin: 0 15px;
     position: relative;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .main-head {
-    height: 8%;
+    height: 60px;
+    flex-grow: 1;
+    padding-bottom: 5px;
 }
 
 .wrapper {
     background: #f0f0f0;
-    width: 98%;
-    height: 90%;
+    height: 100%;
     position: relative;
-    left: 1%;
     box-shadow: 0 5px 8px rgba(0, 0, 0, 0.3);
+    flex-grow: 0;
 }
 
 footer {
     text-align: center;
-    height: 5vh;
+    line-height: 40px;
+    flex-grow: 0;
 }
 
 /*header divs*/
 
 #logo {
-    width: 15%;
     color: #1dc45f;
     font-size: 35pt;
-    margin-right: 5%;
-    margin-left: 10px;
     font-family: 'Caveat', cursive;
-    line-height: 100%;
+    line-height: 50px;
 }
 
 #logo,
@@ -77,19 +103,29 @@ footer {
 }
 
 #username {
-    position: absolute;
-    right: 0;
-    width: 15%;
+    float: right;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+#username a {
+    text-decoration: none;
+    color: #a3a1a1;
+    text-align: center;
+}
+
+#username:hover > .submenu {
+    display: block;
 }
 
 .button {
-    padding-top: 15px;
     width: 10%;
     text-decoration: none;
     color: #a3a1a1;
     text-align: center;
     display: inline-block;
-    height: 100%;
+    min-width: 160px;
+    line-height: 50px;
 }
 
 .button:hover {
@@ -99,23 +135,11 @@ footer {
 /*main-head*/
 
 .main-head {
-    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     position: relative;
-}
-
-.kanban-name,
-.team {
-    position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
-}
-
-.kanban-name {
-    margin-left: 15px;
-    width: 40%;
+    height: 60px;
 }
 
 .kanban-name {
@@ -130,10 +154,8 @@ footer {
     display: inline;
 }
 
-.team {
-    position: absolute;
-    right: 2%;
-    top: 40%;
+.team i {
+    line-height: 60px;
 }
 
 .fa-users {
@@ -167,6 +189,7 @@ footer {
     flex-grow: 0;
     margin: 5px;
     width: 250px;
+    min-width: 250px;
 }
 
 /*card content*/
@@ -280,12 +303,6 @@ footer {
 /*cursor: pointer;*/
 /*}*/
 
-/*footer*/
-
-footer p {
-    margin-top: 1%;
-}
-
 .fas {
     font-size: 18pt;
     color: #9d9d9d;
@@ -301,23 +318,11 @@ footer p {
     color: #8a8a8a;
 }
 
-#username {
-    cursor: pointer;
-    text-decoration: none;
-}
-
-#username a {
-    text-decoration: none;
-    color: #a3a1a1;
-    text-align: center;
-}
-
 .submenu {
     position: absolute;
-    width: 85%;
+    min-width: 160px;
     z-index: 99;
-    right: 6%;
-    top: 75%;
+    top: 50px;
     display: none;
     list-style: none;
     color: #a3a1a1;
@@ -325,17 +330,13 @@ footer p {
     transition: all 0.3s ease;
 }
 
-li {
+.submenu li {
     text-align: center;
-    height: 40px;
+    line-height: 40px;
 }
 
-li:hover {
+.submenu li:hover {
     background: #393a3a;
-}
-
-#username:hover > .submenu {
-    display: block;
 }
 
 /*Scrollbar*/
