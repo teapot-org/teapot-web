@@ -26,10 +26,6 @@ const InnerTicketList = connect(
     getTicketListTickets(ticketList.id);
   }
 
-  shouldComponentUpdate(nextProps) {
-    return nextProps.ticketList !== this.props.ticketList;
-  }
-
   render() {
     const {ticketList, tickets, isAuthenticated} = this.props;
 
