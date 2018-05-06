@@ -1,5 +1,6 @@
 import React from 'react';
 import {Draggable} from 'react-beautiful-dnd'
+import {connect} from 'react-redux'
 import styled from 'styled-components';
 
 import TicketListContent from '../primatives/TicketListContent';
@@ -10,11 +11,14 @@ const Title = styled.h4``;
 
 class TicketList extends React.Component {
   render() {
-    const ticketList = this.props.ticketList;
-    const index = this.props.index;
+    const {ticketList, index, isAuthenticated} = this.props;
 
     return (
-      <Draggable draggableId={'list-' + ticketList.id} index={index}>
+      <Draggable
+        draggableId={'list-' + ticketList.id}
+        index={index}
+        isDragDisabled={!isAuthenticated}
+      >
         {(provided, snapshot) => (
           <Container
             innerRef={provided.innerRef}
@@ -39,4 +43,9 @@ class TicketList extends React.Component {
   }
 }
 
-export default TicketList;
+export default connect(
+  state => ({
+    isAuthenticated: state.oauth.isAuthenticated
+  }),
+  dispatch => ({})
+)(TicketList);

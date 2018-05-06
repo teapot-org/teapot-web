@@ -12,7 +12,8 @@ const ScrollContainer = styled.div.attrs({className: 'scroll-container'})``;
 
 const InnerTicketList = connect(
   state => ({
-    tickets: state.tickets.tickets
+    tickets: state.tickets.tickets,
+    isAuthenticated: state.oauth.isAuthenticated,
   }),
   dispatch => ({
     getTicketListTickets: (id) => {
@@ -30,10 +31,15 @@ const InnerTicketList = connect(
   }
 
   render() {
-    const {ticketList, tickets} = this.props;
+    const {ticketList, tickets, isAuthenticated} = this.props;
 
     return ticketList.tickets.map((ticketId, index) => (
-      <Draggable key={ticketId} draggableId={'ticket-' + ticketId} index={index}>
+      <Draggable
+        key={ticketId}
+        draggableId={'ticket-' + ticketId}
+        index={index}
+        isDragDisabled={!isAuthenticated}
+      >
         {(dragProvided, dragSnapshot) => (
           <Ticket
             key={ticketId}
