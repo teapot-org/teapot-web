@@ -1,0 +1,413 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+html, body, #root, main {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    background-color: #d9d8d9;
+    display: flex;
+    flex-direction: column;
+    min-width: 1200px;
+    height: 100vh;
+    font-family: 'Open Sans', sans-serif;
+    overflow: hidden;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background-color: #3e3f3f;
+    height: 50px;
+    width: 100%;
+    min-width: 1200px;
+    position: relative;
+    display: flex;
+    flex-flow: row;
+
+    justify-content: space-between;
+}
+
+header > div {
+    flex-grow: 1;
+    text-align: center;
+}
+
+header > div:first-child {
+    text-align: left;
+    margin-left: 15px;
+}
+
+header > div:last-child {
+    text-align: right;
+    margin-right: 15px;
+}
+
+main {
+    background: #d9d8d9;
+    height: 88vh;
+    width: calc(100vw - 30px);
+    margin: 0 15px;
+    position: relative;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-head {
+    height: 60px;
+    flex-grow: 1;
+    padding-bottom: 5px;
+}
+
+.wrapper {
+    background: #f0f0f0;
+    height: 100%;
+    position: relative;
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.3);
+    flex-grow: 0;
+}
+
+footer {
+    text-align: center;
+    line-height: 40px;
+    flex-grow: 0;
+}
+
+/*header divs*/
+
+#logo {
+    color: #1dc45f;
+    font-size: 35pt;
+    font-family: 'Caveat', cursive;
+    line-height: 50px;
+}
+
+#logo,
+#organizations,
+#kanbans {
+    float: left;
+}
+
+#notifications {
+    position: absolute;
+    right: 15%;
+}
+
+#username {
+    float: right;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+#username a {
+    text-decoration: none;
+    color: #a3a1a1;
+    text-align: center;
+}
+
+#username:hover > .submenu {
+    display: block;
+}
+
+.button {
+    width: 10%;
+    text-decoration: none;
+    color: #a3a1a1;
+    text-align: center;
+    display: inline-block;
+    min-width: 160px;
+    line-height: 50px;
+}
+
+.button:hover {
+    background: #393a3a;
+}
+
+/*main-head*/
+
+.main-head {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+    height: 60px;
+}
+
+.kanban-name {
+    color: #336d4a;
+}
+
+.kanban {
+    font-size: 20pt;
+}
+
+.host {
+    display: inline;
+}
+
+.team i {
+    line-height: 60px;
+}
+
+.fa-users {
+    font-size: 30px;
+}
+
+/*main-head end*/
+
+/*cards*/
+
+.lists {
+    width: 98%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    position: absolute;
+    left: 1%;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    background: #f5f5f5;
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.2);
+    /*!* Параметры тени *!*/
+    flex-basis: 19%;
+    flex-shrink: 0;
+    flex-grow: 0;
+    margin: 5px;
+    width: 250px;
+    min-width: 250px;
+}
+
+/*card content*/
+
+.list-header {
+    text-align: center;
+    min-height: 35px;
+
+    display: flex;
+    transition: background-color 0.1s ease;
+    color: rgb(109, 135, 138);
+}
+
+.list-header:hover {
+    background-color: white;
+}
+
+.list-header > h4 {
+    padding: 8px;
+    transition: background-color ease 0.2s;
+    flex-grow: 1;
+    user-select: none;
+    position: relative;
+}
+
+.card-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding-left: 8px;
+    padding-right: 4px;
+    transition: background-color 0.1s ease, opacity 0.1s ease;
+    user-select: none;
+    height: 100%;
+}
+
+.drop-zone {
+    min-height: 90%;
+    margin-bottom: 8px;
+}
+
+.scroll-container {
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-right: 4px;
+    height: 100%;
+}
+
+.card-container {
+    border-radius: 2px;
+    border: 1px solid #d9d8d9;
+    padding: 8px;
+    min-height: 40px;
+    margin-bottom: 8px;
+    user-select: none;
+    transition: background-color 0.1s ease;
+    color: #3b3b3b;
+    display: flex;
+    align-items: center;
+}
+
+.card-container:hover {
+    background: white;
+    color: black;
+}
+
+.card-content {
+    flex-grow: 1;
+    flex-basis: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-name {
+    color: #1dc45f;
+    padding: 5px;
+}
+
+.card-description {
+    padding: 5px;
+}
+
+.lock {
+    margin-left: 5px;
+}
+
+/*.list .add-new {*/
+/*transform: translate(0, -2px);*/
+/*}*/
+
+/*#add-list {*/
+/*border-right: solid 2px #c0c0c0;*/
+/*}*/
+
+/*.add {*/
+/*position: absolute;*/
+/*text-align: center;*/
+/*left: 50%;*/
+/*top: 50%;*/
+/*transform: translate(-50%, -50%);*/
+/*color: #b4b4b4;*/
+/*font-size: 12pt;*/
+/*}*/
+
+/*.add p:first-child {*/
+/*font-size: 40pt;*/
+/*}*/
+
+/*.add:hover {*/
+/*transition: ease-in-out 0.15s;*/
+/*color: #8a8a8a;*/
+/*cursor: pointer;*/
+/*}*/
+
+.fas {
+    font-size: 18pt;
+    color: #9d9d9d;
+}
+
+.fa-users {
+    font-size: 40px;
+}
+
+.fa-users:hover {
+    cursor: pointer;
+    transition: ease-in-out 0.15s;
+    color: #8a8a8a;
+}
+
+.submenu {
+    position: absolute;
+    min-width: 160px;
+    z-index: 99;
+    top: 50px;
+    display: none;
+    list-style: none;
+    color: #a3a1a1;
+    background: #3e3f3f;
+    transition: all 0.3s ease;
+}
+
+.submenu li {
+    text-align: center;
+    line-height: 40px;
+}
+
+.submenu li:hover {
+    background: #393a3a;
+}
+
+/*Scrollbar*/
+::-webkit-scrollbar {
+    width: 7px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.404);
+    border-radius: 10px;
+    background-color: #f0f0f0;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+    background-color: #9b9b9b;
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                                       supported by Chrome and Opera */
+}
+
+/* Style inputs with type="text", select elements and textareas */
+input[type=text], select, textarea {
+    width: 100%; /* Full width */
+    padding: 12px; /* Some padding */
+    border: 1px solid #ccc; /* Gray border */
+    border-radius: 4px; /* Rounded borders */
+    box-sizing: border-box; /* Make sure that padding and width stays in place */
+    margin-top: 6px; /* Add a top margin */
+    margin-bottom: 16px; /* Bottom margin */
+    resize: vertical;
+    display: block;
+    /* Allow the user to vertically resize the textarea (not horizontally) */
+}
+
+/* Style the submit button with a specific background color etc */
+input[type=submit] {
+    background-color: #1dc45f;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* When moving the mouse over the submit button, add a darker green color */
+input[type=submit]:hover {
+    background-color: rgba(19, 185, 4, 0.62);
+}
+
+/* Add a background color and some padding around the form */
+.form {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    min-width: 300px;
+    width: 30%;
+    left: 34%;
+    position: absolute;
+}
+
+main h2 {
+    text-align: center;
+}

@@ -1,0 +1,36 @@
+{
+  "name": "teapot-web",
+  "version": "0.1.0",
+  "repository": "https://github.com/teapot-org/teapot-web.git",
+  "author": [
+    "Nikolay Toporkov <toporkov.kolya96@gmail.com>",
+    "Arthur Salimyanov <sar243102@gmail.com>"
+  ],
+  "license": "GPL-3.0",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "history": "^4.7.2",
+    "react": "^16.3.2",
+    "react-beautiful-dnd": "^7.1.2",
+    "react-dom": "^16.3.2",
+    "react-redux": "^5.0.7",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-router-redux": "^5.0.0-alpha.9",
+    "react-scripts": "^1.1.1",
+    "redux": "^3.7.2",
+    "redux-persist": "^5.9.1",
+    "redux-thunk": "^2.2.0",
+    "semantic-ui-react": "^0.79.0",
+    "styled-components": "^3.2.6"
+  },
+  "devDependencies": {
+    "redux-devtools-extension": "^2.13.2"
+  }
+}
