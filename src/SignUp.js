@@ -4,7 +4,7 @@ import {
 } from 'semantic-ui-react';
 
 class SignUp extends React.Component {
-
+  constructor(){
     state = {
      email: '',
      username: '',
@@ -14,6 +14,7 @@ class SignUp extends React.Component {
      birthday: '',
      description: ''
   };
+}
 
   onChange = e => {
     const { name, value }  = e.target;
