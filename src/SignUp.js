@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Button, Form, Grid, Header, Segment,
+  Button, Form, Grid, Header, Segment, Input, TextArea,
 } from 'semantic-ui-react';
 
 const SignUp = () => (
@@ -23,18 +23,60 @@ const SignUp = () => (
     <Grid textAlign="center" style={{ height: '100%' }} verticalAlign="middle">
       <Grid.Column style={{ maxWidth: 450 }}>
         <Header as="h2" color="teal" textAlign="center">
-Sign up form
+Sign up
         </Header>
         <Form size="large">
           <Segment>
-
-            <Form.Input error placeholder="Please enter your email" icon="at" iconPosition="left" />
-            <Form.Input error placeholder="Please enter your username" icon="user" iconPosition="left" />
-            <Form.Input error placeholder="Please enter your password" type="password" icon="lock" iconPosition="left" />
-            <Form.Input fluid placeholder="First Name" />
-            <Form.Input fluid placeholder="Last Name" />
-            <Form.Input fluid placeholder="Birthday" type="date" />
-            <Form.TextArea placeholder="Tell us more" />
+            <Form.Field>
+              <Input
+                label={{ icon: 'asterisk' }}
+                labelPosition="left corner"
+                placeholder="email"
+                type="email"
+                required
+              />
+            </Form.Field>
+            <Form.Field>
+              <Input
+                required
+                placeholder="username"
+                label={{ icon: 'asterisk' }}
+                labelPosition="left corner"
+              />
+            </Form.Field>
+            <Form.Field>
+              <Input
+                required
+                type="password"
+                placeholder="password"
+                label={{ icon: 'asterisk' }}
+                labelPosition="left corner"
+              />
+            </Form.Field>
+            <Form.Field>
+              <Input
+                fluid
+                placeholder="First Name"
+              />
+            </Form.Field>
+            <Form.Field>
+              <Input
+                fluid
+                placeholder="Last Name"
+              />
+            </Form.Field>
+            <Form.Field>
+              <Input
+                fluid
+                placeholder="Birthday"
+                type="date"
+              />
+            </Form.Field>
+            <Form.Field>
+              <TextArea
+                placeholder="Tell us more"
+              />
+            </Form.Field>
 
 
             <Button color="teal" fluid size="large">
