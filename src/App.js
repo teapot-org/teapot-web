@@ -5,7 +5,7 @@ import SignUp from './SignUp';
 const App = () => (
   <BrowserRouter>
     <Switch>
-      <Route path="/signup" component={SignUp} />
+      <Route exact path="/signup" component={SignUp} />
     </Switch>
   </BrowserRouter>
 );
